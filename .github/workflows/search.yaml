@@ -1,0 +1,23 @@
+name: Search in JSON
+
+on:
+  workflow_dispatch:
+    inputs:
+      id:
+        description: ID to search in the JSON
+        type: string
+        required: true
+        default: "50"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "17"
+      - run: npm install
+      - name: Run search
+        run: |
+          npm run search ${{ github.event.inputs.id }}
